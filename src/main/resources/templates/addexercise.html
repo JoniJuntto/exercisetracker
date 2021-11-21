@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exercise list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<h2>Add exercise</h2>
+		<div class="col-md-4">
+		<form th:object="${exercise}" th:action="@{save}" action="#" method="post">
+		  	<label for="nickname">Nickname</label>
+			<input type="text" id="nickname" th:field="*{nickname}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	
+		  	<label for="time">Time in minutes</label>
+			<input type="number" th:field="*{time}" class="form-control"/>
+
+			<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="sportlist">Sport</label>
+			 <select id="sportlist" th:field="*{sport}" class="form-control">
+       			<option th:each="sport: ${sports}" th:value="${sport.sportid}" th:text="${sport.name}"></option>
+    		</select>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-primary" value="Save"></input>
+		</form>
+		</div>
+	</div>
+</body>
+</html>
