@@ -1,12 +1,18 @@
 package com.jonij.exercisetracker.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,38 +41,35 @@ public class ExerciseController {
         return "exerciselist";
     }
   
-	// RESTful service to get all students
     @RequestMapping(value="/exercises")
     public @ResponseBody List<Exercise> exerciseListRest() {	
         return (List<Exercise>) repository.findAll();
     }    
 
-	// RESTful service to get student by id
     @RequestMapping(value="/exercise/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Exercise> findExerciseRest(@PathVariable("id") Long exerciseId) {	
     	return repository.findById(exerciseId);
     }       
-    
-    // Add new student
+
     @RequestMapping(value = "/add")
     public String addExercise(Model model){
     	model.addAttribute("exercise", new Exercise());
     	model.addAttribute("sports", srepository.findAll());
         return "addexercise";
     }     
-    
-    // Save new student
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Exercise exercise){
         repository.save(exercise);
         return "redirect:exerciselist";
     }    
 
-    // Delete student
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteExercise(@PathVariable("id") Long exerciseId, Model model) {
     	repository.deleteById(exerciseId);
         return "redirect:../exerciselist";
     }  
+
+
 }

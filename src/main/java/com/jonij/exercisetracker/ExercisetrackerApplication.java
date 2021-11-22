@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Bean;
 import com.jonij.exercisetracker.domain.ExerciseRepository;
 import com.jonij.exercisetracker.domain.SportRepository;
 import com.jonij.exercisetracker.domain.UserRepository;
+
+import java.time.LocalDate;
+
 import com.jonij.exercisetracker.ExercisetrackerApplication;
-import com.jonij.exercisetracker.domain.User;
 import com.jonij.exercisetracker.domain.Sport;
 import com.jonij.exercisetracker.domain.Exercise;
 
@@ -29,15 +31,21 @@ public class ExercisetrackerApplication {
 			srepository.save(new Sport("Football"));
 			srepository.save(new Sport("Running"));
 			srepository.save(new Sport("Swimming"));
+			srepository.save(new Sport("Hockey"));
+			srepository.save(new Sport("Tennis"));
+			srepository.save(new Sport("Weight lifting"));
+			srepository.save(new Sport("Basketball"));
+			srepository.save(new Sport("Baseball"));
+			srepository.save(new Sport("Volleyball"));
+			srepository.save(new Sport("Yoga"));
+			srepository.save(new Sport("Stretching"));
+			srepository.save(new Sport("Biking"));
+			srepository.save(new Sport("Dancing"));
+			srepository.save(new Sport("Rugby"));
 			
-			erepository.save(new Exercise("Sporttaaja", 12,  srepository.findByName("Football").get(0)));
-			erepository.save(new Exercise("Urheilija",  34, srepository.findByName("Swimming").get(0)));	
+			erepository.save(new Exercise("Heartrate higher than usual", 12,  srepository.findByName("Football").get(0), LocalDate.of(2021, 11, 20)));
+			erepository.save(new Exercise("Felt easy, feeling good!",  34, srepository.findByName("Swimming").get(0), LocalDate.of(2021,11,21)));	
 			
-			// Create users: admin/admin user/user
-			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
-			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
-			urepository.save(user1);
-			urepository.save(user2);
 			
 			log.info("fetch all exercises");
 			for (Exercise exercise : erepository.findAll()) {

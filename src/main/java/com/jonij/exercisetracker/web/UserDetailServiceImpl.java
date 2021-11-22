@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import com.jonij.exercisetracker.domain.User;
 import com.jonij.exercisetracker.domain.UserRepository;
 
-/**
- * This class is used by spring security to authenticate and authorize user
- **/
+//Authorize and authenticate users, used by Spring security
 @Service
 public class UserDetailServiceImpl implements UserDetailsService  {
 	private final UserRepository repository;

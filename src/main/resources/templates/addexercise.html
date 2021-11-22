@@ -10,8 +10,8 @@
 		<h2>Add exercise</h2>
 		<div class="col-md-4">
 		<form th:object="${exercise}" th:action="@{save}" action="#" method="post">
-		  	<label for="nickname">Nickname</label>
-			<input type="text" id="nickname" th:field="*{nickname}" class="form-control"/>
+		  	<label for="notes">Feelings / notes after exercise</label>
+			<input type="text" id="notes" th:field="*{notes}" class="form-control"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	
 		  	<label for="time">Time in minutes</label>
@@ -25,6 +25,7 @@
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" class="btn btn-primary" value="Save"></input>
+			<div style="clear: both; display: block; height: 10px;"></div>
 		</form>
 		</div>
 	</div>

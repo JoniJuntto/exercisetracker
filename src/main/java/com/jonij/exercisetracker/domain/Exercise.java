@@ -6,16 +6,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import net.bytebuddy.asm.Advice.Local;
 
 @Entity
 public class Exercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private String nickname;
+	private String notes;
 	private Integer time; 
+	private LocalDate timestamp;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -23,11 +27,13 @@ public class Exercise {
 	private Sport sport;
 	
 	public Exercise() {}
-	public Exercise(String nickname, Integer time, Sport sport) {
+	public Exercise(String notes, Integer time, Sport sport, LocalDate timestamp) {
 		super();
-		this.nickname = nickname;
+		this.notes = notes;
 		this.time = time;
 		this.sport = sport;
+		this.timestamp = timestamp;
+
 	}
 	public Long getId() {
 		return id;
@@ -35,11 +41,11 @@ public class Exercise {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getNotes() {
+		return notes;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	public Integer getTime() {
 		return time;
@@ -53,9 +59,19 @@ public class Exercise {
 	public void setSport(Sport sport) {
 		this.sport = sport;
 	}
+
+	public LocalDate getTimestamp(){
+		return timestamp;
+	}
+	public void setTimestamp(LocalDate timestamp){
+		this.timestamp = LocalDate.now();
+	}
 	@Override
 	public String toString() {
-		return "Exercise [id=" + id + ", nickname=" + nickname + ", time=" + time + ", sport=" + sport + "]";
+		return "Exercise [id=" + id + ", notes=" + notes + ", sport=" + sport + ", time=" + time + ", timestamp="
+				+ timestamp + "]";
 	}
+
+	
 	
 }

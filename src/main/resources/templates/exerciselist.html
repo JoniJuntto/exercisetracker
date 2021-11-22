@@ -20,15 +20,16 @@
 	</div>
     <table class="table table-striped">
 		<tr>
-		    <th>Nickname</th>
+		    <th>Feelings / notes after exercise</th>
 		    <th>Time</th>
 		    <th>Sport</th>
-		    <th> </th>
+		    <th>Timestamp</th>
 		</tr>  
     	<tr th:each = "exercise : ${exercises}">
-    		<td th:text="${exercise.nickname}"></td>
+    		<td th:text="${exercise.notes}"></td>
     		<td th:text="${exercise.time}"></td>
-    		<td th:text="${exercise.sport.name}"></td> 		
+    		<td th:text="${exercise.sport.name}"></td> 	
+			<td th:text="${exercise.timestamp}"></td>
  			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${student.id})}" class="btn btn-xs btn-danger">Delete</a></td>    		
     	</tr>
      </table>
